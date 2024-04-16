@@ -1941,7 +1941,7 @@ void ServerFamily::Info(CmdArgList args, ConnectionContext* cntx) {
     append("client_read_buffer_bytes", m.facade_stats.conn_stats.read_buf_capacity);
     append("blocked_clients", m.facade_stats.conn_stats.num_blocked_clients);
     append("dispatch_queue_entries", m.facade_stats.conn_stats.dispatch_queue_entries);
-    append("maxclients", maxclients); // absl::GetFlag(FLAGS_maxclients)
+    append("maxclients", maxclients);
   }
 
   if (should_enter("MEMORY")) {
