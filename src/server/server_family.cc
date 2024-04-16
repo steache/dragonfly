@@ -1056,7 +1056,7 @@ void PrintPrometheusMetrics(const Metrics& m, StringResponse* resp) {
   const auto& conn_stats = m.facade_stats.conn_stats;
   AppendMetricWithoutLabels("connected_clients", "", conn_stats.num_conns, MetricType::GAUGE,
                             &resp->body());
-  AppendMetricWithoutLabels("max_clients", "", absl::GetFlag(FLAGS_maxclients), MetricType::GAUGE,
+  AppendMetricWithoutLabels("max_clients", "", GetFlag(FLAGS_maxclients), MetricType::GAUGE,
                             &resp->body());
   AppendMetricWithoutLabels("client_read_buffer_bytes", "", conn_stats.read_buf_capacity,
                             MetricType::GAUGE, &resp->body());
@@ -1941,7 +1941,7 @@ void ServerFamily::Info(CmdArgList args, ConnectionContext* cntx) {
     append("client_read_buffer_bytes", m.facade_stats.conn_stats.read_buf_capacity);
     append("blocked_clients", m.facade_stats.conn_stats.num_blocked_clients);
     append("dispatch_queue_entries", m.facade_stats.conn_stats.dispatch_queue_entries);
-    append("maxclients", maxclients);
+    append("maxclients", GetFlag(FLAGS_maxclients));
   }
 
   if (should_enter("MEMORY")) {
